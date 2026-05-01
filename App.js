@@ -1,21 +1,22 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from './styles'; 
+import { StatusBar } from 'expo-status-bar';
 
-// 📦 Importando as suas telas (AGORA COM O FINANCEIRO!)
+// IMPORTAÇÃO DAS SUAS TELAS
 import Login from './Login';
+import Dashboard from './Dashboard';
 import Cadastro from './Cadastro';
-import Catalogo from './Catalogo'; 
-import Financeiro from './Financeiro'; // 👈 AQUI ESTÁ A MÁGICA!
+import Catalogo from './Catalogo';
+import Financeiro from './Financeiro';
+import { COLORS } from './styles';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Menu de abas que abre após o login
+// CONFIGURAÇÃO DO MENU INFERIOR (TABS)
 function MenuAbas() {
   return (
     <Tab.Navigator
@@ -23,9 +24,11 @@ function MenuAbas() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'Cadastro') {
+          if (route.name === 'Início') {
+            iconName = focused ? 'stats-chart' : 'stats-chart-outline';
+          } else if (route.name === 'Cadastro') {
             iconName = focused ? 'add-circle' : 'add-circle-outline';
-          } else if (route.name === 'Catálogo') {
+          } else if (route.name === 'Estoque') {
             iconName = focused ? 'shirt' : 'shirt-outline';
           } else if (route.name === 'Financeiro') {
             iconName = focused ? 'wallet' : 'wallet-outline';
@@ -36,30 +39,46 @@ function MenuAbas() {
         tabBarActiveTintColor: COLORS.gold,
         tabBarInactiveTintColor: '#556475',
         tabBarStyle: { 
-          backgroundColor: '#070A13', 
-          borderTopColor: '#1A2236',
-          height: 60,
-          paddingBottom: 8
+          backgroundColor: COLORS.bg, 
+          borderTopColor: COLORS.border,
+          height: 65,
+          paddingBottom: 10,
+          paddingTop: 5
         },
-        headerShown: false, // 🚀 Tira o nome do topo
+        headerStyle: { 
+          backgroundColor: COLORS.bg, 
+          elevation: 0, 
+          shadowOpacity: 0,
+          borderBottomWidth: 1,
+          borderBottomColor: COLORS.border
+        },
+        headerTitleStyle: { 
+          color: COLORS.textPrimary,
+          fontWeight: 'bold',
+          fontSize: 18,
+          letterSpacing: 1
+        },
+        headerTitleAlign: 'center',
       })}
     >
-      <Tab.Screen name="Cadastro" component={Cadastro} />
-      <Tab.Screen name="Catálogo" component={Catalogo} />
-      <Tab.Screen name="Financeiro" component={Financeiro} />
+      <Tab.Screen name="Início" component={Dashboard} options={{ title: 'DASHBOARD' }} />
+      <Tab.Screen name="Cadastro" component={Cadastro} options={{ title: 'NOVO ITEM' }} />
+      <Tab.Screen name="Estoque" component={Catalogo} options={{ title: 'MEU ESTOQUE' }} />
+      <Tab.Screen name="Financeiro" component={Financeiro} options={{ title: 'RELATÓRIOS' }} />
     </Tab.Navigator>
   );
 }
 
-// Estrutura principal de navegação
+// NAVEGAÇÃO PRINCIPAL (FLUXO DE LOGIN)
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator 
-        initialRouteName="Login"
-        screenOptions={{ headerShown: false }}
-      >
+      <StatusBar style="light" />
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {/* Tela de Login vem primeiro */}
         <Stack.Screen name="Login" component={Login} />
+        
+        {/* Após o login, o usuário entra no Menu de Abas */}
         <Stack.Screen name="Tabs" component={MenuAbas} />
       </Stack.Navigator>
     </NavigationContainer>

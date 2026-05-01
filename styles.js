@@ -2,13 +2,13 @@ import { StyleSheet } from 'react-native';
 
 // 🏆 PALETA PREMIUM COPA 2026
 export const COLORS = {
-  bg: '#070A13',           // Fundo Carbono ultra escuro
-  cardBg: '#111625',       // Azul/Preto fechado para os cards
-  textPrimary: '#FFFFFF',  // Branco puro
-  textSecondary: '#7A8B9E',// Cinza fosco elegante
-  accent: '#00E676',       // Verde Esmeralda (Sucesso/Botões)
-  border: '#1A233A',       // Divisórias discretas
-  gold: '#FFD700',         // Dourado taça da copa
+  bg: '#070A13', // Fundo Carbono ultra escuro
+  cardBg: '#111625', // Azul/Preto fechado para os cards
+  textPrimary: '#FFFFFF', // Branco puro
+  textSecondary: '#7A8B9E', // Cinza fosco elegante
+  accent: '#00E676', // Verde Esmeralda (Sucesso/Botões)
+  border: '#1A233A', // Divisórias discretas
+  gold: '#FFD700', // Dourado taça da copa
 };
 
 export default StyleSheet.create({
@@ -35,7 +35,7 @@ export default StyleSheet.create({
     padding: 20,
     borderWidth: 1,
     borderColor: COLORS.border, // Borda sutil escura
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 5,

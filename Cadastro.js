@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Alert, StyleSheet, ScrollView, SafeAreaView, Platform, StatusBar, KeyboardAvoidingView } from 'react-native';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  Alert, 
+  StyleSheet, 
+  ScrollView, 
+  SafeAreaView, 
+  Platform, 
+  StatusBar, 
+  KeyboardAvoidingView 
+} from 'react-native';
 import axios from 'axios';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage'; 
@@ -45,7 +57,6 @@ export default function Cadastro() {
     }
   };
 
-  // Função para converter links do Google Drive em links diretos de imagem
   const converterLinkDrive = (url) => {
     if (url.includes('drive.google.com')) {
       const id = url.split('/d/')[1]?.split('/')[0];
@@ -54,23 +65,12 @@ export default function Cadastro() {
     return url;
   };
 
-  const fazerLogout = async () => {
-    Alert.alert('Sair 🚪', 'Deseja voltar para a tela de login?', [
-      { text: 'Cancelar', style: 'cancel' },
-      { text: 'Sair', style: 'destructive', onPress: async () => {
-          await AsyncStorage.clear(); 
-          navigation.reset({ index: 0, routes: [{ name: 'Login' }] });
-      }}
-    ]);
-  };
-
   const cadastrarProduto = async () => {
     if (!time || !preco || !quantidade || !tamanho) {
       Alert.alert('Atenção ⚠️', 'Preencha os campos obrigatórios!');
       return;
     }
 
-    // Aplica a conversão de links do Drive antes de salvar
     const fotosArray = [
       converterLinkDrive(foto1), 
       converterLinkDrive(foto2), 
@@ -133,13 +133,13 @@ export default function Cadastro() {
           
           <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 }}>
             <View style={{ flex: 1 }}>
-              <Text style={styles.title}>Novo Cadastro</Text>
-              <Text style={{ color: COLORS.textSecondary }}>Monteiro Outlet</Text>
+              {}
+              <Text style={styles.title}></Text>
             </View>
-            
+          
             <View style={{ flexDirection: 'row' }}>
               <TouchableOpacity 
-                style={[specificStyles.syncButton, { backgroundColor: itensPendentes > 0 ? COLORS.gold : '#1A2236', marginRight: 10 }]} 
+                style={[specificStyles.syncButton, { backgroundColor: itensPendentes > 0 ? COLORS.gold : '#1A2236' }]} 
                 onPress={sincronizarFila}
               >
                 <Ionicons name="cloud-upload-outline" size={20} color={itensPendentes > 0 ? '#070A13' : '#556475'} />
@@ -147,15 +147,11 @@ export default function Cadastro() {
                   <View style={specificStyles.badgeFila}><Text style={specificStyles.badgeText}>{itensPendentes}</Text></View>
                 )}
               </TouchableOpacity>
-
-              <TouchableOpacity style={[specificStyles.syncButton, { backgroundColor: '#1A2236' }]} onPress={fazerLogout}>
-                <Ionicons name="log-out-outline" size={20} color="#FF3366" />
-              </TouchableOpacity>
             </View>
           </View>
 
           <Text style={specificStyles.inputLabel}>Nome do Time</Text>
-          <TextInput style={specificStyles.input} value={time} onChangeText={setTime} placeholder="Ex: Flamengo..." placeholderTextColor="#556475" />
+          <TextInput style={specificStyles.input} value={time} onChangeText={setTime} placeholder="Ex:Brasil..." placeholderTextColor="#556475" />
 
           <Text style={specificStyles.inputLabel}>Gênero</Text>
           <View style={specificStyles.selectorContainer}>

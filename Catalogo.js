@@ -101,7 +101,7 @@ export default function Catalogo() {
       <StatusBar barStyle="light-content" backgroundColor="#070A13" />
 
       <View style={specificStyles.customHeader}>
-        <Text style={styles.title}>Estoque Monteiro</Text>
+        <Text style={styles.title}></Text>
         <TouchableOpacity style={specificStyles.headerIcon} onPress={carregarProdutos}>
           <Ionicons name="refresh" size={22} color={COLORS.gold} />
         </TouchableOpacity>

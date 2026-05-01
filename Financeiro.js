@@ -155,7 +155,7 @@ export default function Financeiro() {
       <StatusBar barStyle="light-content" backgroundColor="#070A13" />
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ padding: 20 }}>
         
-        <Text style={styles.title}>Fluxo de Caixa</Text>
+        <Text style={styles.title}></Text>
         
         <View style={specificStyles.formCard}>
           <Text style={specificStyles.formTitle}>Registrar Nova Venda</Text>
